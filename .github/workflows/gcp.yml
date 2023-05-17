@@ -14,6 +14,8 @@ jobs:
     env:
       IMAGE_NAME: lesson-087
       PROJECT_ID: organic-nation-386906
+      SERVICE: lesson-087 # TODO: update Cloud Run service name
+      REGION: asia # TODO: update Cloud Run service region
     steps:
     - name: Checkout
       uses: actions/checkout@v2
@@ -65,3 +67,20 @@ jobs:
         docker tag $IMAGE_NAME:latest asia-docker.pkg.dev/organic-nation-386906/asia.gcr.io/$IMAGE_NAME:$GIT_TAG
         docker push asia-docker.pkg.dev/organic-nation-386906/asia.gcr.io/$IMAGE_NAME:latest
         docker push asia-docker.pkg.dev/organic-nation-386906/asia.gcr.io/$IMAGE_NAME:$GIT_TAG
+        
+    - name: Deploy to Cloud Run
+      id: deploy
+      uses: google-github-actions/deploy-cloudrun@v0
+      with:
+          service: ${{ env.SERVICE }}
+          region: ${{ env.REGION }}
+          # NOTE: If using a pre-built image, update the image name here
+          image: asia-docker.pkg.dev/organic-nation-386906/asia.gcr.i/${{ env.SERVICE }}:latest
+          # NOTE: You can also set env variables here:
+          #  env_vars: |
+          #  NODE_ENV=production
+          #  TOKEN_EXPIRE=6400
+
+      # If required, use the Cloud Run url output in later steps
+    - name: Show Output
+      run: echo ${{ steps.deploy.outputs.url }}
