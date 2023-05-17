@@ -15,7 +15,7 @@ jobs:
       IMAGE_NAME: lesson-087
       PROJECT_ID: organic-nation-386906
       SERVICE: lesson-087 # TODO: update Cloud Run service name
-      REGION: asia # TODO: update Cloud Run service region
+      REGION: us-central1 # TODO: update Cloud Run service region
     steps:
     - name: Checkout
       uses: actions/checkout@v2
