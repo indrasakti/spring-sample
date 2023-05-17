@@ -75,7 +75,7 @@ jobs:
           service: ${{ env.SERVICE }}
           region: ${{ env.REGION }}
           # NOTE: If using a pre-built image, update the image name here
-          image: asia-docker.pkg.dev/organic-nation-386906/asia.gcr.i/${{ env.SERVICE }}:latest
+          image: asia-docker.pkg.dev/organic-nation-386906/asia.gcr.io/${{ env.SERVICE }}:latest
           # NOTE: You can also set env variables here:
           #  env_vars: |
           #  NODE_ENV=production
